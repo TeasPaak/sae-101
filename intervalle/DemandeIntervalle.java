@@ -23,7 +23,8 @@ import java.util.Scanner;
 public class DemandeIntervalle {
 
     /**
-     * Demande à l'utilisateur de rentrer l'intervalle des opérandes
+     * Demande à l'utilisateur de rentrer l'intervalle 2 opérandes 
+     * L'algorithme crée lui même l'interval
      * 
      * @param args non utilisé
      */
@@ -63,7 +64,7 @@ public class DemandeIntervalle {
                            +"------------------------------------------------");
 
 
-        /* Demande l'opérande Min */
+        /* Demande l'opérande 1 */
 
         System.out.print("Entrez l'opérande minimum :");
         operandeMin = analyseurEntree.hasNextInt();
@@ -81,7 +82,7 @@ public class DemandeIntervalle {
         
         valeurOperandeMin = analyseurEntree.nextInt();
 
-        /* Demande l'opérande Max */
+        /* Demande l'opérande 2 */
 
         System.out.print("\nEntrez l'opérande maximum :");
         operandeMax = analyseurEntree.hasNextInt();
@@ -99,76 +100,10 @@ public class DemandeIntervalle {
 
         valeurOperandeMax = analyseurEntree.nextInt();
 
+        /* Comparaison des deux opérandes */
+
+       //TODO comparer les deux opérandes pour déterminer le plus petit et créer l'intervalle en fonction         
         
-        /* Verifie Max > Min */
-
-        while (valeurOperandeMax <= valeurOperandeMin) {
-            
-            String reponse;
-
-            System.out.println("\n" + ERREUR_MAX_SUPERIEUR_MIN);
-
-            System.out.print("Voulez vous ressaisir l'opérande minimum ? (y/n) : ");
-            reponse = analyseurEntree.next();
-
-            if (reponse.equals("y")) {
-                /* Redemande l'opérande Min */
-                
-                System.out.print("\nEntrez l'opérande minimum :");
-                operandeMin = analyseurEntree.hasNextInt();
-                
-                while (!operandeMin) {
-
-                    System.out.println(ERREUR_NOT_ENTIER);
-
-                    variablePoubelle = analyseurEntree.next() 
-                                + analyseurEntree.nextLine();
-
-                    System.out.print("\nEntrez l'opérande minimum :");
-                    operandeMin = analyseurEntree.hasNextInt();
-                }
-
-                valeurOperandeMin = analyseurEntree.nextInt();
-
-                /* Redemande l'opérande Max */
-
-                System.out.print("\nEntrez l'opérande maximum :");
-                operandeMax = analyseurEntree.hasNextInt();
-
-                while (!operandeMax) {
-
-                    System.out.println(ERREUR_NOT_ENTIER);
-
-                    variablePoubelle = analyseurEntree.next() 
-                                + analyseurEntree.nextLine();
-
-                    System.out.print("\nEntrez l'opérande maximum :");
-                    operandeMax = analyseurEntree.hasNextInt();
-                }
-
-                valeurOperandeMax = analyseurEntree.nextInt();
-
-            }
-            else {
-                /* Redemande l'opérande Max */
-
-                System.out.print("\nEntrez l'opérande maximum :");
-                operandeMax = analyseurEntree.hasNextInt();
-
-                while (!operandeMax) {
-
-                    System.out.println(ERREUR_NOT_ENTIER);
-
-                    variablePoubelle = analyseurEntree.next() 
-                                    + analyseurEntree.nextLine();
-
-                    System.out.print("\nEntrez l'opérande maximum :");
-                    operandeMax = analyseurEntree.hasNextInt();
-                }
-
-                valeurOperandeMax = analyseurEntree.nextInt();
-            }            
-        }
 
         /* Message final */
         
