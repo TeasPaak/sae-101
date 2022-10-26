@@ -1,5 +1,5 @@
 /*
- * ChoixIntervales.java                                              21 oct. 2022
+ * ChoixIntervale.java                                              21 oct. 2022
  * IUT De Rodez, BUT Info1 2022-2023, pas de copyright ni copyleft
  */
 
@@ -11,8 +11,6 @@
  public class ChoixIntervales {
 
     public static void main(String[] args) {
-
-        String reponseQuestion;
 
         int maximumNombre;
         int minimumNombre;
@@ -26,8 +24,7 @@
         while(minimumNombre >= maximumNombre){
             System.out.print("Votre minimum est plus grand que votre maximum.\n"
                              + "Voulez vous modifier votre minimum ? (y/n) : ");
-            reponseQuestion = analyseurEntree.nextLine();
-            if(reponseQuestion.equals("y")){
+            if(reponseDonne(analyseurEntree.nextLine())){
                 minimumNombre = valideBorne(analyseurEntree, "minimum");
             } else {
                 maximumNombre = valideBorne(analyseurEntree, "maximum");
@@ -40,7 +37,6 @@
 
     private static int valideBorne(Scanner analyseurEntree, 
                                    String borne){
-
         System.out.print(borne + " : ");
         String entreeBorneActive = analyseurEntree.nextLine();
 
@@ -54,5 +50,17 @@
 
     private static boolean valideEntier(String str){
         return str != null && str.matches("[0-9]+");
+    }
+
+    private static boolean reponseDonne(String res) {
+        final String [] LISTE_REPONSES = {"YES","Yes","yes", "Y", "y",
+                                          "OUI", "Oui", "oui", "O", "o"};
+
+        for(int i = 0; i < LISTE_REPONSES.length; i++) {
+            if(LISTE_REPONSES[i].equals(res)) {
+                return true;
+            }
+        }
+        return false;
     }
  }
