@@ -1,5 +1,5 @@
 /*
- * ChoixIntervale.java                                              21 oct. 2022
+ * ChoixIntervales.java                                              21 oct. 2022
  * IUT De Rodez, BUT Info1 2022-2023, pas de copyright ni copyleft
  */
 
