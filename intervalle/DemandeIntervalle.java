@@ -31,13 +31,18 @@ public class DemandeIntervalle {
 
     public static void main(String[] args) {
 
-        boolean operandeMin,
-                operandeMax;
+        boolean operande1,
+                operande2;
 
         String variablePoubelle;
 
-        int valeurOperandeMin,
-            valeurOperandeMax;
+        int valeurOperande1,
+            valeurOperande2;
+        
+        int operandeMin,
+            operandeMax;
+        
+        String reponseUtilisateur;
         
         final String ERREUR_MAX_SUPERIEUR_MIN = """         
                                                            ERREUR !        
@@ -67,9 +72,9 @@ public class DemandeIntervalle {
         /* Demande l'opérande 1 */
 
         System.out.print("Entrez l'opérande minimum :");
-        operandeMin = analyseurEntree.hasNextInt();
+        operande1 = analyseurEntree.hasNextInt();
 
-        while (!operandeMin) {
+        while (!operande1) {
 
             System.out.println(ERREUR_NOT_ENTIER);
 
@@ -77,17 +82,17 @@ public class DemandeIntervalle {
                                + analyseurEntree.nextLine();
 
             System.out.print("\nEntrez l'opérande minimum :");
-            operandeMin = analyseurEntree.hasNextInt();
+            operande1 = analyseurEntree.hasNextInt();
         }
         
-        valeurOperandeMin = analyseurEntree.nextInt();
+        valeurOperande1 = analyseurEntree.nextInt();
 
         /* Demande l'opérande 2 */
 
         System.out.print("\nEntrez l'opérande maximum :");
-        operandeMax = analyseurEntree.hasNextInt();
+        operande2 = analyseurEntree.hasNextInt();
 
-        while (!operandeMax) {
+        while (!operande2) {
 
             System.out.println(ERREUR_NOT_ENTIER);
 
@@ -95,20 +100,33 @@ public class DemandeIntervalle {
                                + analyseurEntree.nextLine();
 
             System.out.print("\nEntrez l'opérande maximum :");
-            operandeMax = analyseurEntree.hasNextInt();
+            operande2 = analyseurEntree.hasNextInt();
         }
 
-        valeurOperandeMax = analyseurEntree.nextInt();
+        valeurOperande2 = analyseurEntree.nextInt();
 
-        /* Comparaison des deux opérandes */
 
-       //TODO comparer les deux opérandes pour déterminer le plus petit et créer l'intervalle en fonction         
+        if (valeurOperande1 <= valeurOperande2) {
+            operandeMin = valeurOperande1
+            operandeMax = valeurOperande2
+        }
+        else {
+            operandeMin = valeurOperande2
+            operandeMax = valeurOperande1
+        }
+
+        System.out.print("L'interval [" + operandeMin + "," + operandeMax + "]" 
+                         + " est-t-il celui souhaité ? (y/n) : ")
         
+        reponseUtilisateur = analyseurEntree.nextLine();
 
-        /* Message final */
-        
-        System.out.println("\nVous avez choisi l'interval I=[" 
-                           + valeurOperandeMin + "," 
-                           + valeurOperandeMax + "]");
+        if (reponseUtilisateur == "y" | reponseUtilisateur == "yes") {
+            System.out.println("\nVous avez choisi l'interval I=[" 
+                               + operandeMin + "," 
+                               + operandeMax + "]");
+
+        // TODO recommencer le programme si l'utilisateur répond non 
+
+        }
      }
  }
