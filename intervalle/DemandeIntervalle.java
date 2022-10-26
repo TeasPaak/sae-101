@@ -38,25 +38,29 @@ public class DemandeIntervalle {
         int valeurOperandeMin,
             valeurOperandeMax;
         
-        final String ERREUR_MAX_SUPERIEUR_MIN = "             ERREUR !        "
-                                                + "\nL'opérande maximum ne peut pas " 
-                                                + "être \ninférieur ou égal " 
-                                                + "à l'opérande minimum.";
+        final String ERREUR_MAX_SUPERIEUR_MIN = """         
+                                                           ERREUR !        
+                                                L'opérande maximum ne peut pas 
+                                                   être inférieur ou égal à
+                                                     l'opérande minimum.
+                                                """;
 
-        final String ERREUR_NOT_ENTIER = "             ERREUR !        "
-                                         + "\nL'opérande saisie n'est pas un "
-                                         + "nombre entier";
+        final String ERREUR_NOT_ENTIER = """       
+                                                   ERREUR !   
+                                         L'opérande saisie n'est pas 
+                                               un nombre entier
+                                         """;
         
         
         Scanner analyseurEntree = new Scanner(System.in);
  
 
         
-        System.out.println("------------------- OBJECTIF -------------------");
-        System.out.println("|      Vous devez rentrer les bornes d'un      |" 
-                           + "    \n| intervalle fermé d'entier " 
-                           + "[minimum, maximum] |\n" 
-                           + "------------------------------------------------");
+        System.out.println("------------------- OBJECTIF -------------------\n"
+                           +"|      Vous devez rentrer les bornes d'un      |\n"
+                           +"|           intervalle fermé d'entier          |\n"
+                           +"|             [minimum, maximum]               |\n"
+                           +"------------------------------------------------");
 
 
         /* Demande l'opérande Min */
