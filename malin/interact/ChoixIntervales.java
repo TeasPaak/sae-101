@@ -8,64 +8,80 @@ package sae101.malin.interact;
 import java.util.Scanner;
 
 /**
+ *Premiere SAE programmation
  *
+ * Concevoir un logiciel d'entrainement au calcul mental
+ * Le programme demander à l'utilisateur de rentrer des paramètres
+ * (interval opérant, opérateurs utilisé)
+ * Le programme envoie une suite de calcul et renvoi le score de l'utilisateur
+ * à la fin de la session
  *
- *
+ * @author Thomas Lemaire
+ * @version 1.0
  */
-public class ChoixIntervales {
+public class ChoixIntervale {
 
-   /**
-    *
-    *
-    *
-    */
-   public static void main(String[] args) {
+    /**
+     *
+     * Demande à l'utilisateur de rentrer l'intervalle des opérandes
+     * en vérifiant que les valeures rentré sont bien des entiers 
+     * et que l'opérande minimum est bien inférieur à l'opérande maximum
+     * 
+     * @param args non utilisé
+     */
+    public static void main(String[] args) {
 
-       int maximumNombre;
-       int minimumNombre;
+        int maximumNombre;
+        int minimumNombre;
 
-       Scanner analyseurEntree = new Scanner(System.in);
+        Scanner analyseurEntree = new Scanner(System.in);
 
-       minimumNombre = valideBorne(analyseurEntree, "minimum");
+        System.out.println(""" 
+                                ------------------- OBJECTIF -------------------
+                                |      Vous devez rentrer les bornes d'un      | 
+                                | intervalle fermé d'entier [minimum, maximum] | 
+                                ------------------------------------------------
+                           """);
 
-       maximumNombre = valideBorne(analyseurEntree, "maximum");
+        minimumNombre = valideBorne(analyseurEntree, "minimum");
 
-       while(minimumNombre >= maximumNombre){
-           System.out.print("Votre minimum est plus grand que votre maximum.\n"
-                            + "Voulez vous modifier votre minimum ? (y/n) : ");
-           if(reponseDonne(analyseurEntree.nextLine())){
-               minimumNombre = valideBorne(analyseurEntree, "minimum");
-           } else {
-               maximumNombre = valideBorne(analyseurEntree, "maximum");
-           }
-       }
+        maximumNombre = valideBorne(analyseurEntree, "maximum");
 
-       System.out.print("minimum : " + minimumNombre
-                        + " / maximum : " + maximumNombre);
-   }
+        while(minimumNombre >= maximumNombre){
+            System.out.print("  ERREUR ! Votre minimum est plus grand que votre maximum.\n"
+                             + "Voulez vous modifier votre minimum ? (y/n) : ");
+            if(reponseDonne(analyseurEntree.nextLine())){
+                minimumNombre = valideBorne(analyseurEntree, "minimum");
+            } else {
+                maximumNombre = valideBorne(analyseurEntree, "maximum");
+            }
+        }
 
-   private static int valideBorne(Scanner analyseurEntree, 
-                                  String borne){
-       System.out.print(borne + " : ");
-       String entreeBorneActive = analyseurEntree.nextLine();
+        System.out.printf("\nInterval choisi [%d;%d] \n",minimumNombre, maximumNombre);
+    }
 
-       while(!(entreeBorneActive != null && entreeBorneActive.matches("[0-9]+"))){
-           System.out.print("Valeur pas prise en compte veulliez saisir " 
-                            + "un entier comme " + borne + " : ");
-           entreeBorneActive = analyseurEntree.nextLine();
-       }
-       return Integer.parseInt(entreeBorneActive);
-   }
+    private static int valideBorne(Scanner analyseurEntree, 
+                                   String borne) {
+        System.out.print("Entrez la borne " + borne + " : ");
+        String entreeBorneActive = analyseurEntree.nextLine();
 
-   private static boolean reponseDonne(String res) {
-       final String [] LISTE_REPONSES = {"YES","Yes","yes", "Y", "y",
-                                         "OUI", "Oui", "oui", "O", "o"};
+        while(!(entreeBorneActive != null && entreeBorneActive.matches("[0-9]+"))) {
+            System.out.print("  ERREUR ! Valeur non prise en compte veulliez saisir " 
+                             + "un entier positif comme " + borne + " : ");
+            entreeBorneActive = analyseurEntree.nextLine();
+        }
+        return Integer.parseInt(entreeBorneActive);
+    }
 
-       for(int i = 0; i < LISTE_REPONSES.length; i++) {
-           if(LISTE_REPONSES[i].equals(res)) {
+    private static boolean reponseDonne(String res) {
+        final String [] LISTE_REPONSES = {"YES","Yes","yes", "Y", "y",
+                                          "OUI", "Oui", "oui", "O", "o"};
+
+        for(int i = 0; i < LISTE_REPONSES.length; i++) {
+            if(LISTE_REPONSES[i].equals(res)) {
                return true;
-           }
-       }
-       return false;
-   }
+            }
+        }
+        return false;
+    }
 }
