@@ -16,7 +16,7 @@ import java.util.Scanner;
  * Le programme envoie une suite de calcul et renvoi le score de l'utilisateur
  * à la fin de la session
  *
- * @author Thomas Lemaire
+ * @author SAE101 TP3 G4
  * @version 1.0
  */
 public class ChoixIntervale {
