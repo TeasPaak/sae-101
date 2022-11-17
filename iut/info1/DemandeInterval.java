@@ -82,7 +82,7 @@ public class DemandeInterval {
                 operandeMax = valeur1;
             }
 
-            out.printf("\nVous avez choisi l'interval I=["%d;%d]\n", operandeMin, operandeMax); 
+            out.printf("\nVous avez choisi l'interval I=[%d;%d]\n", operandeMin, operandeMax); 
         } 
         if (!testValeur) {
             out.println(ERREUR_PAS_ENTIER);
