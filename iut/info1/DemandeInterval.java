@@ -108,6 +108,5 @@ public class DemandeInterval {
         out.println("\nVous avez choisi l'interval I=[" 
                            + operandeMin + "," 
                            + operandeMax + "]");
-        }
     }
 }
