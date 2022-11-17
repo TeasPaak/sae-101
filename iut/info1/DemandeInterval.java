@@ -33,8 +33,7 @@ public class DemandeInterval {
 
     public static void main(String[] args) {
 
-        boolean testValeur1,
-                testValeur2;
+        boolean testValeur;
 
         int valeur1,
             valeur2;
@@ -60,53 +59,33 @@ public class DemandeInterval {
                     """);
 
 
-        /* Demande la première valeur en s'assurant que c'est bien un int */
-
-        out.print("Entrez une valeur:");
-        testValeur1 = analyseurEntree.hasNextInt();
-
-        while (!testValeur1) {
-
-            out.println(ERREUR_PAS_ENTIER);
+        /* Demande deux valeurs en s'assurant que c'est bien un int */
+        out.print("Entrez une première valeur:");
+        testValeur = analyseurEntree.hasNextInt();
+        if (testValeur) {
+            valeur1 = analyseurEntree.nextInt();
             analyseurEntree.nextLine();
-
-            out.print("\nEntrez une valeur :");
-            testValeur1 = analyseurEntree.hasNextInt();
+            
+            out.print("\nEntrez une deuxième valeur :");
+            testValeur = analyseurEntree.hasNextInt();
         }
-        
-        valeur1 = analyseurEntree.nextInt();
-        analyseurEntree.nextLine();
-
-        /* Demande la demauxième valeur en s'assurant que c'est bien un int */
-
-        out.print("\nEntrez une deuxième valeur :");
-        testValeur2 = analyseurEntree.hasNextInt();
-
-        while (!testValeur2) {
-
-            out.println(ERREUR_PAS_ENTIER);
+        if (testValeur) {
+            valeur2 = analyseurEntree.nextInt();
             analyseurEntree.nextLine();
+            
+            /* Créer l'intervalle en fonction de la valeur minimale */
+            if (valeur1 < valeur2) {
+                operandeMin = valeur1;
+                operandeMax = valeur2;
+            } else {
+                operandeMin = valeur2;
+                operandeMax = valeur1;
+            }
 
-            out.print("\nEntrez la deuxième valeur :");
-            testValeur2 = analyseurEntree.hasNextInt();
+            out.printf("\nVous avez choisi l'interval I=["%d;%d]\n", operandeMin, operandeMax); 
+        } 
+        if (!testValeur) {
+            out.println(ERREUR_PAS_ENTIER);
         }
-
-        valeur2 = analyseurEntree.nextInt();
-        analyseurEntree.nextLine();
-
-        /* Créer l'intervalle en fonction de la valeur minimale */
-
-        if (valeur1 < valeur2) {
-            operandeMin = valeur1;
-            operandeMax = valeur2;
-        }
-        else {
-            operandeMin = valeur2;
-            operandeMax = valeur1;
-        }
-
-        out.println("\nVous avez choisi l'interval I=[" 
-                           + operandeMin + "," 
-                           + operandeMax + "]");
     }
 }
