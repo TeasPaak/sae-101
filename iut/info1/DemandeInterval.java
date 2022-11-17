@@ -1,6 +1,6 @@
 /*
  * DemandeInterval                                            21 oct 2022
- * IUT de Rodez, Tom JAMMES, pas de copyright ni de copyleft
+ * IUT de Rodez, Tom JAMMES, Tony LAPEYRE, Thomas LEMAIRE, Thomas IZARD, pas de copyright ni de copyleft
  */
 
 package iut.info1.sae101;
@@ -18,7 +18,7 @@ import static java.lang.System.out;
  * Le programme envoie une suite de calcul et renvoi le score de l'utilisateur
  * à la fin de la session
  *
- * @author Tom Jammes
+ * @author Tom JAMMES, Tony LAPEYRE, Thomas LEMAIRE, Thomas IZARD
  * @version 1.0
  */
 
