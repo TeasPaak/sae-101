@@ -1,6 +1,6 @@
 /*
- * ChoixIntervale.java                                              21 oct. 2022
- * IUT De Rodez, BUT Info1 2022-2023, pas de copyright ni copyleft
+ * CalculsAleatoires                                            21 oct 2022
+ * IUT de Rodez, Tom JAMMES, pas de copyright ni de copyleft
  */
 
 package iut.info1.sae101;
@@ -9,7 +9,7 @@ import java.util.Scanner;
 import static java.lang.System.out;
 
 /**
- *Premiere SAE programmation
+ * Premiere SAE programmation
  *
  * Concevoir un logiciel d'entrainement au calcul mental
  * Le programme demander à l'utilisateur de rentrer des paramètres
@@ -17,53 +17,117 @@ import static java.lang.System.out;
  * Le programme envoie une suite de calcul et renvoi le score de l'utilisateur
  * à la fin de la session
  *
- * @author Thomas Lemaire
- * @version 1.0
+ * @author Tom Jammes
+ * @version 2.2
  */
-public class ChoixIntervale {
+
+public class CalculsAleatoires {
 
     /**
-     *
      * Demande à l'utilisateur de rentrer l'intervalle des opérandes
-     * en vérifiant que les valeures rentré sont bien des entiers 
-     * et que l'opérande minimum est bien inférieur à l'opérande maximum
+     * Donne un calcul aléatoire
      * 
      * @param args non utilisé
      */
+
     public static void main(String[] args) {
 
-        int maximumNombre;
-        int minimumNombre;
+        boolean testValeur1,
+                testValeur2;
 
+        String variablePoubelle;
+
+        int valeur1,
+            valeur2;
+
+        int operandeMin,
+            operandeMax;
+
+        int reponseJustes = 0,
+            reponseFausses = 0;
+        
         String reponseUtilisateur;
+        final String OUI = "y";
 
-        int reponseJustes = 0;
-        int reponseFausses = 0;
-
+        final String ERREUR_NOT_ENTIER = """                   
+                                                                 ERREUR !        
+                                             L'opérande saisie n'est pas un nombre entier
+                                         """;
+        
+        
         Scanner analyseurEntree = new Scanner(System.in);
+ 
 
-        System.out.println(""" 
-                                ------------------- OBJECTIF -------------------
-                                |      Vous devez rentrer les bornes d'un      | 
-                                | intervalle fermé d'entier [minimum, maximum] | 
-                                ------------------------------------------------
-                           """);
+        
+        out.println(""" 
+                        ------------------- OBJECTIF -------------------
+                        |      Vous devez rentrer les bornes d'un      | 
+                        | intervalle fermé d'entier [minimum, maximum] | 
+                        -----------------------------------------------
+                    """);
 
-        minimumNombre = valideBorne(analyseurEntree, "minimum");
 
-        maximumNombre = valideBorne(analyseurEntree, "maximum");
+        /* Demande la première valeur en s'assurant que c'est bien un int */
 
-        while(minimumNombre >= maximumNombre) {
-            System.out.print("  ERREUR ! Votre minimum est plus grand que votre maximum.\n"
-                             + "Voulez vous modifier votre minimum ? (y/n) : ");
-            if(reponseDonne(analyseurEntree.nextLine())) {
-                minimumNombre = valideBorne(analyseurEntree, "minimum");
-            } else {
-                maximumNombre = valideBorne(analyseurEntree, "maximum");
-            }
+        out.print("Entrez une valeur:");
+        testValeur1 = analyseurEntree.hasNextInt();
+
+        while (!testValeur1) {
+
+            out.println(ERREUR_NOT_ENTIER);
+
+            variablePoubelle = analyseurEntree.next() 
+                               + analyseurEntree.nextLine();
+
+            out.print("\nEntrez une valeur :");
+            testValeur1 = analyseurEntree.hasNextInt();
+        }
+        
+        valeur1 = analyseurEntree.nextInt();
+        analyseurEntree.nextLine();
+
+        /* Demande la demauxième valeur en s'assurant que c'est bien un int */
+
+        out.print("\nEntrez une deuxième valeur :");
+        testValeur2 = analyseurEntree.hasNextInt();
+
+        while (!testValeur2) {
+
+            out.println(ERREUR_NOT_ENTIER);
+
+            variablePoubelle = analyseurEntree.next() 
+                               + analyseurEntree.nextLine();
+
+            out.print("\nEntrez la deuxième valeur :");
+            testValeur2 = analyseurEntree.hasNextInt();
         }
 
-        out.printf("\nInterval choisi [%d;%d] \n",minimumNombre, maximumNombre);
+        valeur2 = analyseurEntree.nextInt();
+        analyseurEntree.nextLine();
+
+        /* Créer l'intervalle en fonction de la valeur minimale */
+
+        if (valeur1 < valeur2) {
+            operandeMin = valeur1;
+            operandeMax = valeur2;
+        }
+        else {
+            operandeMin = valeur2;
+            operandeMax = valeur1;
+        }
+
+        out.println("\nVous avez choisi l'interval I=[" 
+                           + operandeMin + "," 
+                           + operandeMax + "]");
+        
+        
+        out.print("L'intervalle vous correspont-il ? (y/n) : ");
+        reponseUtilisateur = analyseurEntree.next();
+        if (!reponseUtilisateur.equals(OUI)) {
+            System.exit(1);
+        }
+
+        /* Calculs aléatoirs */
 
         out.println("""
                        ------------------- OBJECTIF -------------------
@@ -75,7 +139,7 @@ public class ChoixIntervale {
         out.print("\nVoulez-vous continuer ? (y/n) : ");
         reponseUtilisateur = analyseurEntree.next() + analyseurEntree.nextLine();
        
-        while (reponseDonne(reponseUtilisateur)) {
+        while (reponseUtilisateur.equals(OUI)) {
             int operateurAleatoire,
                 entierAleatoire1,
                 entierAleatoire2,
@@ -87,8 +151,8 @@ public class ChoixIntervale {
 
             /* Si l'opérateur aléatoire est "+" */
             if (operateurAleatoire == 1) {
-                entierAleatoire1 = minimumNombre + ((int)(Math.random()*1.0E09))%(maximumNombre-minimumNombre+1);
-                entierAleatoire2 = minimumNombre + ((int)(Math.random()*1.0E09))%(maximumNombre-minimumNombre+1);
+                entierAleatoire1 = operandeMin + ((int)(Math.random()*1.0E09))%(operandeMax-operandeMin+1);
+                entierAleatoire2 = operandeMin + ((int)(Math.random()*1.0E09))%(operandeMax-operandeMin+1);
                 
                 out.printf("%d + %d = ", entierAleatoire1, entierAleatoire2);
                 resultatJoueur = analyseurEntree.nextInt();
@@ -101,10 +165,12 @@ public class ChoixIntervale {
                     out.println("C'est FAUX !");
                     reponseFausses ++;
                 }
+                out.print("\nVoulez-vous continuer ? (y/n) : ");
+                reponseUtilisateur = analyseurEntree.next() + analyseurEntree.nextLine();
             }
             else if (operateurAleatoire == 2) {
-                entierAleatoire1 = minimumNombre + ((int)(Math.random()*1.0E09))%(maximumNombre-minimumNombre+1);
-                entierAleatoire2 = minimumNombre + ((int)(Math.random()*1.0E09))%(maximumNombre-minimumNombre+1);
+                entierAleatoire1 = operandeMin + ((int)(Math.random()*1.0E09))%(operandeMax-operandeMin+1);
+                entierAleatoire2 = operandeMin + ((int)(Math.random()*1.0E09))%(operandeMax-operandeMin+1);
                 
                 out.printf("%d - %d = ", entierAleatoire1, entierAleatoire2);
                 resultatJoueur = analyseurEntree.nextInt();
@@ -117,10 +183,12 @@ public class ChoixIntervale {
                     out.println("C'est FAUX !");
                     reponseFausses ++;
                 }
+                out.print("\nVoulez-vous continuer ? (y/n) : ");
+                reponseUtilisateur = analyseurEntree.next() + analyseurEntree.nextLine();
             }
             else if (operateurAleatoire == 3) {
-                entierAleatoire1 = minimumNombre + ((int)(Math.random()*1.0E09))%(maximumNombre-minimumNombre+1);
-                entierAleatoire2 = minimumNombre + ((int)(Math.random()*1.0E09))%(maximumNombre-minimumNombre+1);
+                entierAleatoire1 = operandeMin + ((int)(Math.random()*1.0E09))%(operandeMax-operandeMin+1);
+                entierAleatoire2 = operandeMin + ((int)(Math.random()*1.0E09))%(operandeMax-operandeMin+1);
                 
                 out.printf("%d * %d = ", entierAleatoire1, entierAleatoire2);
                 resultatJoueur = analyseurEntree.nextInt();
@@ -133,56 +201,35 @@ public class ChoixIntervale {
                     out.println("C'est FAUX !");
                     reponseFausses ++;
                 }
+                out.print("\nVoulez-vous continuer ? (y/n) : ");
+                reponseUtilisateur = analyseurEntree.next() + analyseurEntree.nextLine();
             }
             else if (operateurAleatoire == 4) {
-                entierAleatoire1 = minimumNombre + ((int)(Math.random()*1.0E09))%(maximumNombre-minimumNombre+1);
-                entierAleatoire2 = minimumNombre + ((int)(Math.random()*1.0E09))%(maximumNombre-minimumNombre+1);
+                if (operandeMin != 0) {
+                    entierAleatoire1 = operandeMin + ((int)(Math.random()*1.0E09))%(operandeMax-operandeMin+1);
+                    entierAleatoire2 = operandeMin + ((int)(Math.random()*1.0E09))%(operandeMax-operandeMin+1);
                 
-                out.printf("%d / %d = ", entierAleatoire1, entierAleatoire2);
-                resultatJoueur = analyseurEntree.nextInt();
+                    out.printf("%d / %d = ", entierAleatoire1, entierAleatoire2);
+                    resultatJoueur = analyseurEntree.nextInt();
 
-                if (resultatJoueur == (entierAleatoire1 / entierAleatoire2)) {
-                    out.println("Bien joué !");
-                    reponseJustes ++;
-                }
-                else {
-                    out.println("C'est FAUX !");
-                    reponseFausses ++;
+                    if (resultatJoueur == (entierAleatoire1 / entierAleatoire2)) {
+                        out.println("Bien joué !");
+                        reponseJustes ++;
+                    }
+                    else {
+                        out.println("C'est FAUX !");
+                        reponseFausses ++;
+                    }
+                    out.print("\nVoulez-vous continuer ? (y/n) : ");
+                    reponseUtilisateur = analyseurEntree.next() + analyseurEntree.nextLine();
                 }
             }
-            out.print("\nVoulez-vous continuer ? (y/n) : ");
-            reponseUtilisateur = analyseurEntree.next() + analyseurEntree.nextLine();
         }
         out.printf("""
                        --------------------- SCORE -------------------
-                       | Réponses justes  : %d                       |
+                       | Réponses justes  : %d                        |
                        | Réponses fausses : %d                        |
                        -----------------------------------------------\n
                     """, reponseJustes, reponseFausses);
-    }
-
-    private static int valideBorne(Scanner analyseurEntree, 
-                                   String borne) {
-        System.out.print("Entrez la borne " + borne + " : ");
-        String entreeBorneActive = analyseurEntree.nextLine();
-
-        while(!(entreeBorneActive != null && entreeBorneActive.matches("[0-9]+"))) {
-            System.out.print("  ERREUR ! Valeur non prise en compte veulliez saisir " 
-                             + "un entier positif comme " + borne + " : ");
-            entreeBorneActive = analyseurEntree.nextLine();
-        }
-        return Integer.parseInt(entreeBorneActive);
-    }
-
-    private static boolean reponseDonne(String res) {
-        final String [] LISTE_REPONSES = {"YES","Yes","yes", "Y", "y",
-                                          "OUI", "Oui", "oui", "O", "o"};
-
-        for(int i = 0; i < LISTE_REPONSES.length; i++) {
-            if(LISTE_REPONSES[i].equals(res)) {
-               return true;
-            }
-        }
-        return false;
     }
 }
