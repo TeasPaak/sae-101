@@ -9,7 +9,8 @@ import java.util.Scanner;
 import static java.lang.System.out;
 
 /**
- * Premiere SAE programmation
+ * SAE 101
+ * Etape 1
  *
  * Concevoir un logiciel d'entrainement au calcul mental
  * Le programme demander à l'utilisateur de rentrer des paramètres
