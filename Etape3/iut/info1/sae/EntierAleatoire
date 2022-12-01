@@ -78,51 +78,51 @@ public class EntierAleatoire {
                 borneMin = permuter;
             }
 
-        out.printf("\nVous avez choisi l'interval I=[%d;%d]\n"
-                   , borneMin, borneMax); 
+            out.printf("\nVous avez choisi l'interval I=[%d;%d]\n"
+                    , borneMin, borneMax); 
 
-        /* Tirage au sort des deux operandes */
-        operandeGauche = borneMin + (int)(Math.random() * ((borneMax - borneMin) + 1));
-        operandeDroit = borneMin + (int)(Math.random() * ((borneMax - borneMin) + 1));
+            /* Tirage au sort des deux operandes */
+            operandeGauche = borneMin + (int)(Math.random() * ((borneMax - borneMin) + 1));
+            operandeDroit = borneMin + (int)(Math.random() * ((borneMax - borneMin) + 1));
 
-        /* Génération du calcul avec opérateur aléatoire */
-        operateur = (int)(Math.random() * 5);
+            /* Génération du calcul avec opérateur aléatoire */
+            operateur = (int)(Math.random() * 5);
+            operateur = 4;
 
+            switch (operateur) {
+                case 1 :
+                    resultat = operandeGauche - operandeDroit;
+                    out.printf("%d - %d = %d\n", operandeGauche, operandeDroit, resultat);
+                    break;
 
-        swith (operateur) {  // FIXME probleme de compilation
-        case operateur == 1 :
-            resultat = operandeGauche - operandeDroit;
-            out.printf("%d - %d = %d\n", operandeGauche, operandeDroit, resultat);
-            break;
+                case 2 :
+                    resultat = operandeGauche * operandeDroit;
+                    out.printf("%d * %d = %d\n", operandeGauche, operandeDroit, resultat);
+                    break;
 
-        case operateur == 2 :
-            resultat = operandeGauche * operandeDroit;
-            out.printf("%d * %d = %d\n", operandeGauche, operandeDroit, resultat);
-            break;
+                case 3 :
+                    /* Gestion du cas de la division par 0 */
+                    while (operandeDroit == 0) {
+                        operandeDroit = borneMin + (int)(Math.random() * ((borneMax - borneMin) + 1));
+                    }
+                    resultat = operandeGauche / operandeDroit;
+                    out.printf("%d / %d = %d\n", operandeGauche, operandeDroit, resultat);
+                    break;
 
-        case operateur == 3 :
-            /* Gestion du cas de la division par 0 */
-            while (operandeDroit == 0) {
-                operandeDroit = borneMin + (int)(Math.random() * ((borneMax - borneMin) + 1));
+                case 4 :
+                    /* Gestion du cas de la division par 0 */
+                    while (operandeDroit == 0) {
+                        operandeDroit = borneMin + (int)(Math.random() * ((borneMax - borneMin) + 1));
+                    }
+                    resultat = operandeGauche % operandeDroit;
+                    out.printf("%d %s %d = %d\n", operandeGauche, "%",operandeDroit, resultat);
+                    break;
+
+                default :
+                    resultat = operandeGauche + operandeDroit;
+                    out.printf("%d + %d = %d\n", operandeGauche, operandeDroit, resultat);
+                    break;     
             }
-            resultat = operandeGauche / operandeDroit;
-            out.printf("%d / %d = %d\n", operandeGauche, operandeDroit, resultat);
-            break;
-
-        case operateur == 4 :
-            /* Gestion du cas de la division par 0 */
-            while (operandeDroit == 0) {
-                operandeDroit = borneMin + (int)(Math.random() * ((borneMax - borneMin) + 1));
-            }
-            resultat = operandeGauche % operandeDroit;
-            out.printf("%d % %d = %d\n", operandeGauche, operandeDroit, resultat);
-            break;
-
-        default :
-            resultat = operandeGauche + operandeDroit;
-            out.printf("%d + %d = %d\n", operandeGauche, operandeDroit, resultat);
-            break;     
-        }
 
         } else {
             out.println(ERREUR_SAISIE_PAS_ENTIER);
