@@ -1,0 +1,131 @@
+/*
+ * EntierAleatoire                                          01 dec. 2022
+ * IUT de Rodez, Tom JAMMES, Tony LAPEYRE, Thomas LEMAIRE, Thomas IZARD, 
+ * pas de copyright ni de copyleft
+ */
+
+package iut.info1.sae101;
+
+import java.util.Scanner;
+import static java.lang.System.out;
+
+/**
+ * SAE 101
+ * Etape 3
+ *
+ * Concevoir un logiciel d'entrainement au calcul mental
+ * Le programme demande à l'utilisateur de rentrer des paramètres
+ * (interval opérant, opérateurs utilisé)
+ * Le programme envoie une suite de calcul et renvoi le score de l'utilisateur
+ * à la fin de la session
+ *
+ * @author Tom JAMMES, Tony LAPEYRE, Thomas LEMAIRE, Thomas IZARD
+ * @version 1.0
+ */
+
+public class EntierAleatoire {
+
+    /**
+     * Demande à l'utilisateur de rentrer l'intervalle des opérandes
+     * et tire un entier aléatoire dans l'interval des opérandes
+     * 
+     * @param args non utilisé
+     */
+
+    public static void main(String[] args) {
+
+        boolean testValeur;
+
+        int borneMin, borneMax;
+        
+        int operandeGauche, operandeDroit, operateur, resultat;
+
+        final String ERREUR_SAISIE_PAS_ENTIER ="""                   
+                                                        ERREUR !        
+                                        L'opérande saisie n'est pas un nombre entier
+                                        """;
+        
+        
+        Scanner analyseurEntree = new Scanner(System.in);
+ 
+        out.println(""" 
+                        ------------------- OBJECTIF -------------------
+                        |      Vous devez rentrer les bornes d'un      | 
+                        | intervalle fermé d'entier [minimum, maximum] | 
+                        -----------------------------------------------
+                    """);
+
+        
+        /* Demande deux valeurs en s'assurant que c'est bien un int */
+        borneMin = 0;    // contrer erreur d'initialisation à la compilation
+        out.print("Entrez une première valeur : ");
+        testValeur = analyseurEntree.hasNextInt();
+        if (testValeur) {            
+            borneMin = analyseurEntree.nextInt();
+            analyseurEntree.nextLine();
+
+            out.print("\nEntrez une deuxième valeur : ");
+            testValeur = analyseurEntree.hasNextInt();
+        }
+        if (testValeur) {
+            borneMax = analyseurEntree.nextInt();
+            analyseurEntree.nextLine();
+            
+            if (borneMin > borneMax) {
+                int permuter;
+                permuter = borneMax;
+                borneMax = borneMin;
+                borneMin = permuter;
+            }
+
+        out.printf("\nVous avez choisi l'interval I=[%d;%d]\n"
+                   , borneMin, borneMax); 
+
+        /* Tirage au sort des deux operandes */
+        operandeGauche = borneMin + (int)(Math.random() * ((borneMax - borneMin) + 1));
+        operandeDroit = borneMin + (int)(Math.random() * ((borneMax - borneMin) + 1));
+
+        /* Génération du calcul avec opérateur aléatoire */
+        operateur = (int)(Math.random() * 5);
+
+
+        swith (operateur) {  // FIXME probleme de compilation
+        case operateur == 1 :
+            resultat = operandeGauche - operandeDroit;
+            out.printf("%d - %d = %d\n", operandeGauche, operandeDroit, resultat);
+            break;
+
+        case operateur == 2 :
+            resultat = operandeGauche * operandeDroit;
+            out.printf("%d * %d = %d\n", operandeGauche, operandeDroit, resultat);
+            break;
+
+        case operateur == 3 :
+            /* Gestion du cas de la division par 0 */
+            while (operandeDroit == 0) {
+                operandeDroit = borneMin + (int)(Math.random() * ((borneMax - borneMin) + 1));
+            }
+            resultat = operandeGauche / operandeDroit;
+            out.printf("%d / %d = %d\n", operandeGauche, operandeDroit, resultat);
+            break;
+
+        case operateur == 4 :
+            /* Gestion du cas de la division par 0 */
+            while (operandeDroit == 0) {
+                operandeDroit = borneMin + (int)(Math.random() * ((borneMax - borneMin) + 1));
+            }
+            resultat = operandeGauche % operandeDroit;
+            out.printf("%d % %d = %d\n", operandeGauche, operandeDroit, resultat);
+            break;
+
+        default :
+            resultat = operandeGauche + operandeDroit;
+            out.printf("%d + %d = %d\n", operandeGauche, operandeDroit, resultat);
+            break;     
+        }
+
+        } else {
+            out.println(ERREUR_SAISIE_PAS_ENTIER);
+        }
+    }
+}
