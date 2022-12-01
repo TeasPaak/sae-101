@@ -92,7 +92,12 @@ public class EntierAleatoire {
             switch (operateur) {
                 case 1 :
                     resultat = operandeGauche - operandeDroit;
-                    out.printf("%d - %d = %d\n", operandeGauche, operandeDroit, resultat);
+                    if (operandeDroit < 0){
+                        operandeDroit = -1 * operandeDroit;
+                        out.printf("%d + %d = %d\n", operandeGauche, operandeDroit, resultat);
+                    } else {
+                        out.printf("%d - %d = %d\n", operandeGauche, operandeDroit, resultat);
+                    }
                     break;
 
                 case 2 :
@@ -120,7 +125,12 @@ public class EntierAleatoire {
 
                 default :
                     resultat = operandeGauche + operandeDroit;
-                    out.printf("%d + %d = %d\n", operandeGauche, operandeDroit, resultat);
+                    if (operandeDroit > 0){
+                        operandeDroit = -1 * operandeDroit;
+                        out.printf("%d - %d = %d\n", operandeGauche, operandeDroit, resultat);
+                    } else {
+                        out.printf("%d + %d = %d\n", operandeGauche, operandeDroit, resultat);
+                    }
                     break;     
             }
 
